@@ -1,4 +1,4 @@
-# InContact API
+# InContact
 
 A gem for the InContact API.
 
@@ -10,7 +10,7 @@ To use it, you must have registered an application in InContact. This can be don
 ### Bundler
 Add the gem to your Gemfile:
 ```ruby
-gem 'incontact_api'
+gem 'incontact'
 ```
 
 Or
@@ -18,7 +18,7 @@ Or
 ### Manually
 
 ```ruby
-gem install incontact_api
+gem install incontact
 ```
 ## Environment Variables
 
@@ -62,7 +62,7 @@ Figaro.require_keys('IC_USERNAME', 'IC_PASSWORD', 'IC_APPLICATION_NAME', 'IC_VEN
 Returns list of agents
 
 ```ruby
-require 'incontact_api'
+require 'incontact'
 
-InContactApi::Connection.base.get "/inContactAPI/services/v6.0/agents"
+InContact::Connection.base.get "/inContactAPI/services/v6.0/agents"
 ```

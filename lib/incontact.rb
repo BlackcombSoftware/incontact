@@ -3,11 +3,11 @@ require 'faraday'
 require 'base64'
 require 'json'
 
-module InContactApi
+module InContact
   class Connection
     class << self
       def setup
-        conn = Faraday.new(:url => Configs.url) do |faraday|
+        Faraday.new(:url => Configs.url) do |faraday|
           faraday.request  :url_encoded             # form-encode POST params
           faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
         end
@@ -28,7 +28,7 @@ module InContactApi
       end
 
       def base
-        api_conn = Faraday.new(:url => authorization[:uri]) do |faraday|
+        Faraday.new(:url => authorization[:uri]) do |faraday|
           faraday.headers["accept-encoding"] = "none"
           faraday.headers["Authorization"] = "bearer #{authorization[:token]}"
           faraday.headers["Content-Type"]  ="application/x-www-form-urlencoded"
@@ -49,17 +49,17 @@ module InContactApi
         application_name = ENV["IC_APPLICATION_NAME"].gsub("\n", "")
         vendor = ENV["IC_VENDOR_NAME"].gsub("\n", "")
         unit = ENV["IC_BUSINESS_UNIT"].gsub("\n", "")
+
         Base64.encode64("#{application_name}@#{vendor}:#{unit}").gsub("\n", "")
       end
 
       def request_body
-        body = {
-          grant_type: ENV["IC_GRANT_TYPE"] || 'password',
+        {
+          grant_type: ENV["IC_GRANT_TYPE"] || "password",
           username: ENV["IC_USERNAME"],
           password: ENV["IC_PASSWORD"],
-          scope: ENV["IC_SCOPE"] || ''
-        }.to_json
-        body.to_s
+          scope: ENV["IC_SCOPE"] || ""
+        }.to_json.to_s
       end
     end
   end
