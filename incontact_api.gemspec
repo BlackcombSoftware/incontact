@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name      = 'incontact_api'
-  s.version   = '1.1'
-  s.date      = '2015-09-28'
+  s.version   = '1.2'
+  s.date      = '2016-01-16'
   s.summary   = 'A Ruby gem to access the InContact API'
   s.description = s.summary
   s.authors     = ['Steven Arsena', 'Andrew Castro']
