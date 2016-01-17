@@ -15,7 +15,7 @@ module InContact
 
       def authorization
         response = setup.post do |req|
-          req.url '/InContactAuthorizationServer/Token'
+          req.url "/InContactAuthorizationServer/Token"
           req.headers["accept-encoding"] = "none"
           req.headers["Content-Type"]  = "application/json; charset=utf-8"
           req.headers["Authorization"] = "basic #{Configs.key}"
