@@ -1,6 +1,8 @@
 # InContact API
 
-A gem for the InContact API
+A gem for the InContact API.
+
+To use it, you must have registered an application in InContact. This can be done from the management dashboard under the **Manage >> API Applications** menu.
 
 
 ## Installation
@@ -20,54 +22,34 @@ gem install incontact_api
 ```
 ## Environment Variables
 
-Define the following as enviroment variables.
+The following as environment variables are used to define the behavior of the gem:
 
-UCN_URL
+`IC_APPLICATION_NAME` : **required** The name of a registered InContact application e.g. `SuperWidget`
 
-UCN_KEY
+`IC_VENDOR_NAME` : **required** The name of the vendor recorded on the registered InContact application e.g. `WidgetsInc.com`
 
-GRANT_TYPE
+`IC_BUSINESS_UNIT` : **required** The ID of the business unit that you wish to access data from.
 
-USERNAME
+`IC_USERNAME` : **required** The username that will be used to authenticate against the API and perform actions.
 
-PASSWORD
+`IC_PASSWORD` : **required** The password for the above user.
 
-SCOPE
+`IC_SCOPE` : _optional_ The space separated list of scopes that the API token should be issued for. Defaults to all authorized scopes of the application. Example: `RealTimeDataApi AgentApi CustomApi` . See list of available scopes below.
+
+`IC_GRANT_TYPE` : _optional_ The grant type for the API token. Defaults to username/password.
+
+`IC_API_TOKEN_URL` : _optional_ The host to use when requesting an API token. Defaults to `https://api.incontact.com`
 
 If you are using rails you could use the [Figaro](https://github.com/laserlemon/figaro) gem to handle setting up environment variables.
 
+### Available Scopes
 
-### Variable Definitions
-
-UCN_URL: This is the base url 'https://api.incontact.com'
-
-UCN_KEY: This is a key that is made up of Application Name@Vendor Name:Business # EX. 'MyApp@MyCompany:12345'
-
-GRANT_TYPE: This variable is based on the types of API you request. More info can be found below in the link
-
-USERNAME: The username to use to access the API.  User must have permissions to create API Applications
-
-PASSWORD: The password for the above username.
-
-SCOPE: The list of API's you want to access.  Format to a string for example "Admin Chat RealTime"
-
-* See important note below on the SCOPE variable
-
-[Link to InContacts API](https://home-c4.incontact.com/InContact/Help/en-US/index.htm#docs)
-
-### Important Note
-
-Starting April 28th InContact will be changing the string format that can be passed to the SCOPE variable.  
-
-Proper string format below:
-
-* RealTimeApi 
-* AdminApi 
-* AgentApi 
-* CustomApi 
-* AuthenticationApi 
-* PatronApi (this is only available in 14.1 and replaces the ChatApi) 
-* ChatApi (this is valid in 13.2 and is translated into PatronApi when passed in 14.1) 
+* `RealTimeDataApi`
+* `AdminApi`
+* `AgentApi`
+* `CustomApi`
+* `AuthenticationApi`
+* `PatronApi`
 
 ## Usage
 
@@ -76,5 +58,5 @@ Returns list of agents
 ```ruby
 require 'incontact_api'
 
-InContactApi::Connection.base.get "/inContactAPI/services/v2.0/agents"
+InContactApi::Connection.base.get "/inContactAPI/services/v6.0/agents"
 ```

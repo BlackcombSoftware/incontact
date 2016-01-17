@@ -42,19 +42,22 @@ module InContactApi
   class Configs
     class << self
       def url
-        ENV["UCN_URL"]
+        ENV["IC_API_TOKEN_URL"] || "https://api.incontact.com"
       end
 
       def key
-        Base64.encode64(ENV["UCN_KEY"]).gsub("\n", "")
+        application_name = ENV["IC_APPLICATION_NAME"].gsub("\n", "")
+        vendor = ENV["IC_VENDOR_NAME"].gsub("\n", "")
+        unit = ENV["IC_BUSINESS_UNIT"].gsub("\n", "")
+        Base64.encode64("#{application_name}@#{vendor}:#{unit}").gsub("\n", "")
       end
 
       def request_body
         body = {
-          grant_type: ENV["GRANT_TYPE"],
-          username: ENV["USERNAME"],
-          password: ENV["PASSWORD"],
-          scope: ENV["SCOPE"]
+          grant_type: ENV["IC_GRANT_TYPE"] || 'password',
+          username: ENV["IC_USERNAME"],
+          password: ENV["IC_PASSWORD"],
+          scope: ENV["IC_SCOPE"] || ''
         }.to_json
         body.to_s
       end
