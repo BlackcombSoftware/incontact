@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name      = 'incontact_api'
-  s.version   = '1.2'
+  s.version   = '2.0'
   s.date      = '2016-01-16'
   s.summary   = 'A Ruby gem to access the InContact API'
   s.description = s.summary
