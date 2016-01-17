@@ -40,7 +40,13 @@ The following as environment variables are used to define the behavior of the ge
 
 `IC_API_TOKEN_URL` : _optional_ The host to use when requesting an API token. Defaults to `https://api.incontact.com`
 
-If you are using rails you could use the [Figaro](https://github.com/laserlemon/figaro) gem to handle setting up environment variables.
+If you are using rails you could use the [Figaro](https://github.com/laserlemon/figaro) gem to handle setting up environment variables. If you do, it's a good idea to check for the required keys on load. Adding the following to `config/initializers/figaro.rb` will do the trick:
+
+```ruby
+require 'figaro'
+
+Figaro.require_keys('IC_USERNAME', 'IC_PASSWORD', 'IC_APPLICATION_NAME', 'IC_VENDOR_NAME', 'IC_BUSINESS_UNIT')
+```
 
 ### Available Scopes
 
