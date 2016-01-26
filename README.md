@@ -1,4 +1,5 @@
 # inContact API
+[![Dependency Status](https://gemnasium.com/BlackcombSoftware/incontact.svg)](https://gemnasium.com/BlackcombSoftware/incontact)
 
 An **unofficial** gem for the inContact API. Documentation of the endpoints is available on their [developer portal](https://developer.incontact.com/).
 
